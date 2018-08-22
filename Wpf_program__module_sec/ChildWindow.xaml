@@ -1,0 +1,81 @@
+﻿<Window x:Name="ChildWindow1" x:Class="Wpf_program__module_sec.ChildWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Wpf_program__module_sec"
+        mc:Ignorable="d"
+        Title="Додати графік" Height="281.221" Width="744.352" Loaded="Window_Loaded">
+    <Window.Resources>
+
+        <Style x:Key="MySimpleScrollBar" TargetType="{x:Type ScrollBar}">
+            <Setter Property="Stylus.IsFlicksEnabled" Value="false"/>
+            <Setter Property="Width" Value="Auto"/>
+            <Setter Property="MinHeight" Value="25"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ScrollBar}">
+                        <Border BorderThickness="1" BorderBrush="Gray">
+                            <Grid Margin="2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock VerticalAlignment="Center" FontSize="16" MinWidth="25" Text="{Binding Value, RelativeSource={RelativeSource TemplatedParent}}"/>
+                                <Grid Grid.Column="1" x:Name="GridRoot" Width="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}" Background="{TemplateBinding Background}">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition MaxHeight="15"/>
+                                        <RowDefinition Height="0.00001*"/>
+                                        <RowDefinition MaxHeight="15"/>
+                                    </Grid.RowDefinitions>
+                                    <RepeatButton x:Name="DecreaseRepeat" Command="ScrollBar.LineDownCommand" Focusable="False">
+                                        <Grid>
+                                            <Path x:Name="DecreaseArrow" Stroke="{TemplateBinding Foreground}" StrokeThickness="1" Data="M 0 4 L 8 4 L 4 0 Z"/>
+                                        </Grid>
+                                    </RepeatButton>
+                                    <RepeatButton Grid.Row="2" x:Name="IncreaseRepeat" Command="ScrollBar.LineUpCommand" Focusable="False">
+                                        <Grid>
+                                            <Path x:Name="IncreaseArrow" Stroke="{TemplateBinding Foreground}" StrokeThickness="1" Data="M 0 0 L 4 4 L 8 0 Z"/>
+                                        </Grid>
+                                    </RepeatButton>
+                                </Grid>
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+    </Window.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <ComboBox x:Name="Name_box" HorizontalAlignment="Left" Margin="16,31,0,0" VerticalAlignment="Top" Width="174" IsEditable="True" Height="25" FontSize="16">
+            <TextBlock>ОМ</TextBlock>
+            <TextBlock>М</TextBlock>
+            <TextBlock>С</TextBlock>
+            <TextBlock>Б</TextBlock>
+            <TextBlock>ОБ</TextBlock>
+            <TextBlock>Р</TextBlock>
+        </ComboBox>
+        <ComboBox x:Name="type_gr" HorizontalAlignment="Left" Margin="237,31,0,0" VerticalAlignment="Top" Width="174" IsEditable="True" Height="25" FontSize="16">
+            <TextBlock>Тspkoп</TextBlock>
+            <TextBlock>Тspkпоа</TextBlock>
+        </ComboBox>
+        <Button x:Name="Add" Content="+" HorizontalAlignment="Left" Margin="674,25,0,0" VerticalAlignment="Top" Width="36" Height="34" Click="Add_Click" FontSize="22" FontWeight="Bold" TextOptions.TextFormattingMode="Display" TextOptions.TextHintingMode="Fixed" FontFamily="SimSun" IsEnabled="False"/>
+
+        <Button x:Name="Save" Content="Зберегти" HorizontalAlignment="Left" Margin="350,189,0,0" VerticalAlignment="Top" Width="166" Click="Save_Click" FontSize="16" Height="41"/>
+        <Button x:Name="Cancel" Content="Відмінити" HorizontalAlignment="Left" Margin="544,189,0,0" VerticalAlignment="Top" Width="166" Click="Cancel_Click" FontSize="16" Height="41"/>
+        <WrapPanel Name="Canvas_Panel" HorizontalAlignment="Left"  Height="87" Width="681" Margin="45,97,0,0" VerticalAlignment="Top" />
+        <Label Content="Назва параметру" HorizontalAlignment="Left" Margin="237,1,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.517,0.074" FontSize="16"/>
+        <Label Content="Назва еталону графіку" HorizontalAlignment="Left" Margin="16,0,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <Label Content="Координати графіку" HorizontalAlignment="Left" Margin="16,61,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <ScrollBar x:Name="numericUpDown" HorizontalAlignment="Left" Style="{DynamicResource MySimpleScrollBar}" VerticalAlignment="Top" Value="1" Maximum="10" Margin="596,25,0,0" SmallChange="1" Minimum="1"  Width="62" Height="34" ValueChanged="numericUpDown_ValueChanged"/>
+        <Label Content="Кількість координат" HorizontalAlignment="Left" Margin="425,27,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.517,0.074" FontSize="16"/>
+        <Label Content="µ" HorizontalAlignment="Left" Margin="32,92,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.517,0.074" FontSize="16" Width="61"/>
+        <Label Content="x" HorizontalAlignment="Left" Margin="32,128,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.517,0.074" FontSize="16" Width="35" Height="42"/>
+    </Grid>
+</Window>
